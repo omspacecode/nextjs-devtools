@@ -3,7 +3,7 @@ import { builder, Builder } from "@builder.io/react";
 import Counter from "./components/Counter/Counter";
 
 import ApiSwitcher from "./components/ApiSwitcher/ApiSwitcher";
-
+import PostSender from './components/PostSender/PostSender';
 import ProductCard from "./components/ProductCard/ProductCard";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
@@ -65,4 +65,15 @@ Builder.registerComponent(ProductCard, {
 //   'component.options.imageUrl': 'state.resultsItem.data.imageUrl'
 // }
 
-
+Builder.registerComponent(PostSender, {
+  name: 'PostSender',
+  inputs: [
+    { name: 'modelName', type: 'string', required:true, defaultValue: 'products' },
+    { 
+      name: 'postData',
+      type: 'object',
+      defaultValue: { name: "Test triggered from Custom component" }, // Default JSON data
+    },
+    { name: 'privateKey', type: 'string', required: true, advanced: true }, // Making this advanced to imply secure handling
+  ],
+});
